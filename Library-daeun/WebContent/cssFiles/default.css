@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+body {
+	background-image: url(images/5.jpg);
+	background-size: 100%;
+	max-width: 80%;
+	min-width: 500px;
+	margin: 0 auto;
+}
+
+#main_wrap {
+	padding-top: 50px;
+}
+
+h1 {
+	text-align: center;
+	font-size: 100px;
+	margin: 20px;
+}
+
+h1>a {
+	color: white;
+	font-family: 'Yeseva One', cursive;
+}
+
+#nn {
+	width: 100%;
+	background-color: rgba(245, 246, 250, 0.5);
+}
+
+#nav {
+	float: none;
+	width: 51%;
+	padding: 10px;
+	margin: 0 auto;
+	list-style: none;
+}
+
+#nav>li {
+	padding: 20px 10px;
+}
+
+#nav a {
+	font-size: 25px;
+	padding: 0 5px;
+	color: black;
+	font-family: 'Noto Serif KR', serif;
+}
+
+#nav a:hover {
+	font-weight: bold;
+}
+
+#context {
+	clear: both;
+}
+
+button {
+	padding: 7px;
+	margin: 5px;
+	float: right;
+	border: 1px solid gray;
+	background-color: rgba(245, 246, 250, 0.5);
+	font-family: 'Noto Serif KR', serif;
+}
+
+button>a {
+	color: black;
+	font-size: 15px;
+}
+
+#context {
+	padding: 50px;
+}
+
+#ct {
+	margin: 0 auto;
+}
+
+#footer {
+	margin-top: 20px;
+}
+
+#context {
+	background-color: rgba(245, 246, 250, 0.8);
+	margin: 30px 0px;
+}
