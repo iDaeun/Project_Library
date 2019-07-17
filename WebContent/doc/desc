@@ -1,0 +1,41 @@
+■LIBRARY Homepage■
+
+*class description:
+
+<index.jsp> : 메인페이지
+
+[frame]
+<header.jsp> : header부분
+<nav.jsp> : nav부분 -> 로그인, 회원가입, 도서검색, 도서신청, 열람실신청, 건의사항, 마이페이지
+<footer.jsp> : footer부분 -> 회원탈퇴, 로그아웃 버튼
+
+[css]
+<default.css> : css
+images : 이미지 모음
+
+[model]
+<MemberInfo.java> : 회원가입시 활용 -> DAO통해 DB로 저장
+<LoginInfo.java> : 로그인시 활용 -> session에 저장
+
+[jdbc]
+<ConnectionProvider.java> : Connection 객체 제공
+<DBCPInit.java> : (=Servlet), Jdbc 드라이버 제공, ConnectionPool 생성
+<JdbcUtil.java> : ResultSet/Statement/Connection close기능, rollback기능 제공
+
+================================================================================================
+*flow:
+
+[관리자 로그인]
+1) id: admin / pw: admin
+2) 관리자 페이지로 이동
+3) 리스트 출력 기능 : 회원목록, 대출도서, 신청도서, 열람실 예약현황, 소유도서목록
+
+[사용자 회원가입]
+1) <regForm.jsp>
+2) 아이디 / 비밀번호 / 이름 입력 -> submit
+3) <regProcess.jsp> 으로 이동
+4) 
+connection객체 생성
+5) <DAO.java> 객체 생성, DAO의 insert(Connection conn, MemberInfo memberInfo) 통해 정보 입력
+
+[사용자 로그인]
