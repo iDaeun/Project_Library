@@ -31,20 +31,17 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
     var deleteChk = confirm('삭제하시겠습니까?\n삭제한 글은 다시 복구되지 않습니다.');
-    if (deleteChk == true) {
+    if (deleteChk) {
 	if (
 <%=idChk%>
     == false) {
 	    alert('작성자만 삭제 가능합니다.');
 	    history.go(-1);
 	} else {
-<%DeleteSuggestionService service = DeleteSuggestionService.getInstance();
-			resultCnt = service.deleteSuggestion(sug_num);%>
-    alert('삭제 완료')
-	    location.href = "viewSuggestions.jsp";
+	    location.href = "deleteSuggestion.jsp?sug_num=<%=sug_num%>";
 	}
     } else {
-	history.go(-1);
+	location.href = "viewSuggestions.jsp";
     }
 </script>
 </head>

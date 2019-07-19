@@ -35,4 +35,20 @@ public class UpdateSuggestionService {
 		}
 		return rCnt;
 	}
+
+	public int updateComment(int sug_num, String sug_comment) {
+		int rCnt = 0;
+
+		Connection conn = null;
+
+		try {
+			conn = ConnectionProvider.getConnection();
+			SuggestionsDao dao = SuggestionsDao.getInstance();
+			rCnt = dao.updateComment(conn, sug_num, sug_comment);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rCnt;
+	}
 }

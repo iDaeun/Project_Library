@@ -77,7 +77,7 @@ table tr td {
 					</tr>
 				</table>
 			</div>
-			<a href="viewSuggestions.jsp">글 목록</a> | <a
+			<a href="viewNotices.jsp">글 목록</a> | <a
 				href="updateNoticeForm.jsp?not_num=<%=notData.getNot_num()%>&user_id=<%=notData.getUser_id()%>"
 			>수정</a> | <a href="confirmDeleteNotice.jsp?not_num=<%=notData.getNot_num()%>&user_id=<%=notData.getUser_id()%>"> 삭제</a>
 		</div>

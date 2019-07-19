@@ -2,10 +2,10 @@ package library.board.suggestions.model;
 
 public class Suggestion {
 	private int sug_num;
-	private String sug_pw;
 	private String sug_title;
 	private String sug_cont;
 	private String user_id;
+	private String sug_comment;
 
 	public int getSug_num() {
 		return sug_num;
@@ -13,14 +13,6 @@ public class Suggestion {
 
 	public void setSug_num(int sug_num) {
 		this.sug_num = sug_num;
-	}
-
-	public String getSug_pw() {
-		return sug_pw;
-	}
-
-	public void setSug_pw(String sug_pw) {
-		this.sug_pw = sug_pw;
 	}
 
 	public String getSug_title() {
@@ -45,6 +37,14 @@ public class Suggestion {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getSug_comment() {
+		return sug_comment;
+	}
+
+	public void setSug_comment(String sug_comment) {
+		this.sug_comment = sug_comment;
 	}
 
 }

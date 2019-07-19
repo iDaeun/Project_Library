@@ -1,7 +1,15 @@
+<%@page import="library.board.suggestions.service.GetSuggestionService"%>
+<%@page import="library.board.suggestions.model.Suggestion"%>
+<%@page import="library.board.suggestions.service.WriteSuggestionService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String user_id = (String) session.getAttribute("user_id");
+	int sug_num = Integer.parseInt(request.getParameter("sug_num"));
+
+	/* 글 내용을 보여주는 서비스 작업을 처리할 객체 */
+	GetSuggestionService service = GetSuggestionService.getInstance();
+
+	Suggestion sugData = service.getSuggestion(sug_num);
 %>
 <!DOCTYPE html>
 <html>
@@ -48,21 +56,33 @@ table tr td {
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<form action="writeSuggestion.jsp" method="post">
+				<table>
+					<tr>
+						<td>글 제목</td>
+						<td><input type="text" value="<%=sugData.getSug_title()%>" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><textarea style="width: 100%; resize: none;" readonly="readonly"><%=sugData.getSug_cont()%></textarea></td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
+				<hr>
+				<form action="writeSuggestionComment.jsp" method="post">
 					<table>
 						<tr>
-							<td>글 제목</td>
-							<td><input type="text" name="sug_title"></td>
+							<td style="text-align: center;">답글</td>
 						</tr>
 						<tr>
-							<td colspan="2">내용</td>
-						</tr>
-						<tr>
-							<td colspan="2"><textarea name="sug_cont" style="width: 100%; resize: none;"></textarea></td>
+							<td><textarea style="width: 100%; resize: none;" name="sug_comment"></textarea></td>
 						</tr>
 					</table>
-					<input type="submit" value="작성">
+					<input type="hidden" name="sug_num" value="<%=sugData.getSug_num()%>"> <input type="submit" value="답글 등록">
 				</form>
+				<table>
+
+				</table>
 			</div>
 		</div>
 		<!-- context 끝 -->

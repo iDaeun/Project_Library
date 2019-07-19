@@ -1,18 +1,10 @@
 <%@page import="library.board.suggestions.service.GetSuggestionService"%>
 <%@page import="library.board.suggestions.model.Suggestion"%>
-<%@page import="library.board.suggestions.model.SuggestionsList"%>
-<%@page import="library.board.suggestions.service.GetSuggestionListService"%>
+<%@page import="library.board.suggestions.service.WriteSuggestionService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String sug_numStr = request.getParameter("sug_num");
-
-	int sug_num = 1;
-
-	if (sug_numStr != null) {
-		sug_num = Integer.parseInt(sug_numStr);
-	}
+	int sug_num = Integer.parseInt(request.getParameter("sug_num"));
 
 	String getId = (String) session.getAttribute("user_id");
 
@@ -20,9 +12,6 @@
 	GetSuggestionService service = GetSuggestionService.getInstance();
 
 	Suggestion sugData = service.getSuggestion(sug_num);
-
-	/* 	System.out.println(sugData.getSug_num());
-		System.out.println(sugData.getSug_cont()); */
 
 	boolean idChk = false;
 
@@ -36,7 +25,9 @@
 		adminChk = true;
 	}
 %>
+<!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width-device-width, initial-scale=1">
@@ -70,20 +61,20 @@
 
     })
 </script>
-
 <style>
 table {
 	width: 100%;
 }
 
 table tr td {
-	border: 1px solid black;
-	padding: 2px;
-	font-size: 16px;
+	border: 1px solid #ddd;
 }
 </style>
+
 </head>
+
 <body>
+
 	<div id="main_wrap">
 		<!-- header 시작 -->
 		<%@include file="../../frame/header.jsp"%>
@@ -98,31 +89,28 @@ table tr td {
 			<div id="ct">
 				<table>
 					<tr>
-						<td>글 번호</td>
 						<td>글 제목</td>
-						<td>작성자</td>
+						<td><input type="text" value="<%=sugData.getSug_title()%>" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td><%=sugData.getSug_num()%></td>
-						<td><%=sugData.getSug_title()%></td>
-						<td><%=sugData.getUser_id()%></td>
+						<td>내용</td>
+						<td><textarea style="width: 100%; resize: none;" readonly="readonly"><%=sugData.getSug_cont()%></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="3" style="text-align: center">글 내용</td>
-					</tr>
-					<tr>
-						<td colspan="3"><textarea name="sug_cont" style="width: 100%; resize: none;" readonly="readonly"><%=sugData.getSug_cont()%></textarea></td>
 					</tr>
 				</table>
+				<hr>
+
+				<table>
+					<tr>
+						<td style="text-align: center;">답글</td>
+					</tr>
+					<tr>
+						<td><textarea style="width: 100%; resize: none;" name="sug_comment" readonly="readonly"><%=sugData.getSug_comment()%></textarea></td>
+					</tr>
+				</table>
+				<a href="viewSuggestions.jsp">글 목록</a>
 			</div>
-			<a href="viewSuggestions.jsp">글 목록</a> | <a
-				href="updateSuggestionForm.jsp?sug_num=<%=sugData.getSug_num()%>&user_id=<%=sugData.getUser_id()%>"
-			>수정</a> | <a href="confirmDeleteSuggestion.jsp?sug_num=<%=sugData.getSug_num()%>&user_id=<%=sugData.getUser_id()%>">
-				삭제</a>
-			<br>
-			<span id="commentSpan" style="display: none"><a
-				href="writeSuggestionCommentForm.jsp?sug_num=<%=sugData.getSug_num()%>"
-			>답글</a></span>
 		</div>
 		<!-- context 끝 -->
 

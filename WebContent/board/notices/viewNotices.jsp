@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 
 <%
-	session.setAttribute("user_id", "admin");
+	session.setAttribute("user_id", "Rex");
 
 	String pageNumberStr = request.getParameter("page");
 

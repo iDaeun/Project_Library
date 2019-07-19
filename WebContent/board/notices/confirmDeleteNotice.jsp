@@ -13,13 +13,11 @@
 	request.setCharacterEncoding("UTF-8");
 	int not_num = Integer.parseInt(request.getParameter("not_num"));
 
-	String getId = (String) request.getParameter("user_id");
-
 	boolean idChk = false;
 
 	int resultCnt = 0;
 	/* 	System.out.println(getId); */
-	if (getId.equals(session.getAttribute("user_id"))) {
+	if (session.getAttribute("user_id").equals("admin")) {
 		idChk = true;
 	}
 %>
@@ -31,21 +29,19 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-    var deleteChk = confirm('삭제하시겠습니까?\n삭제한 글은 다시 복구되지 않습니다.');
-    if (deleteChk == true) {
-	if (
-<%=idChk%>
-    == false) {
-	    alert('관리자만 삭제 가능합니다.');
-	    history.go(-1);
+    if (
+<%=idChk%> == false
+    ) {
+	alert('관리자만 삭제 가능합니다.');
+	history.go(-1);
+    } else {
+
+	var deleteChk = confirm('삭제하시겠습니까?\n삭제한 글은 다시 복구되지 않습니다.');
+	if (deleteChk) {
+	    location.href = "deleteNotice.jsp?not_num=<%=not_num%>";
 	} else {
-<%DeleteNoticeService service = DeleteNoticeService.getInstance();
-			resultCnt = service.deleteNotice(not_num);%>
-    alert('삭제 완료')
 	    location.href = "viewNotices.jsp";
 	}
-    } else {
-	history.go(-1);
     }
 </script>
 </head>

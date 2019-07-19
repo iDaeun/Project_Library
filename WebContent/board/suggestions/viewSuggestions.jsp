@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 
 <%
-	session.setAttribute("user_id", "admin");
+	session.setAttribute("user_id", "Rex");
 
 	String pageNumberStr = request.getParameter("page");
 
@@ -86,7 +86,16 @@ table tr td {
 						<td><%=sugg.getUser_id()%></td>
 					</tr>
 					<%
+						if (sugg.getSug_comment() != null) {
+					%>
+					<tr>
+						<td>답변</td>
+						<td><a href="viewSuggestionComment.jsp?sug_num=<%=sugg.getSug_num()%>">re) <%=sugg.getSug_title()%></a></td>
+						<td>admin</td>
+					</tr>
+					<%
 						}
+							}
 					%>
 				</table>
 				<%
