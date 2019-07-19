@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	session.setAttribute("user_id", "admin");
-%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width-device-width, initial-scale=1">
-<title>Library Homepage</title>
+<title>Manager Page</title>
 <!-- boostrap연결 -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <!-- css연결 -->
@@ -23,17 +19,23 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 
+<style>
+#nav {
+	width: 70%
+}
+</style>
+
 </head>
 
 <body>
 
 	<div id="main_wrap">
 		<!-- header 시작 -->
-		<%@include file="frame/header.jsp"%>
+		<%@include file="frame/header1.jsp"%>
 		<!-- header 끝 -->
 
 		<!-- nav 시작 -->
-		<%@include file="frame/nav.jsp"%>
+		<%@include file="frame/nav1.jsp"%>
 		<!-- nav 끝 -->
 
 		<!-- context 시작 -->
@@ -42,11 +44,9 @@
 		</div>
 		<!-- context 끝 -->
 
-		<!-- footer 시작 -->
-		<%@include file="frame/footer.jsp"%>
-		<!-- footer 끝 -->
 	</div>
 
-
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
 </body>
 </html>
