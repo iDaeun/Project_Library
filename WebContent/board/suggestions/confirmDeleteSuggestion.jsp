@@ -1,4 +1,5 @@
 
+<%@page import="users.model.LoginInfo"%>
 <%@page import="library.board.suggestions.service.DeleteSuggestionService"%>
 <%@page import="library.board.suggestions.service.WriteSuggestionService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -12,13 +13,26 @@
 	request.setCharacterEncoding("UTF-8");
 	int sug_num = Integer.parseInt(request.getParameter("sug_num"));
 
-	String getId = (String) request.getParameter("user_id");
+	String user_id = (String) request.getParameter("user_id");
 
 	boolean idChk = false;
 
 	int resultCnt = 0;
+
+	String getId = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id();
+	} else {
+		getId = "";
+	}
+
 	/* 	System.out.println(getId); */
-	if (getId.equals(session.getAttribute("user_id"))) {
+	if (getId.equals(user_id)) {
 		idChk = true;
 	}
 %>

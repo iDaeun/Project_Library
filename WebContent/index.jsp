@@ -1,8 +1,6 @@
+<%@page import="users.model.LoginInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	session.setAttribute("user_id", "admin");
-%>
 
 <!DOCTYPE html>
 <html>
@@ -46,7 +44,7 @@
 		<%@include file="frame/footer.jsp"%>
 		<!-- footer 끝 -->
 	</div>
-
-
+	
+	
 </body>
 </html>

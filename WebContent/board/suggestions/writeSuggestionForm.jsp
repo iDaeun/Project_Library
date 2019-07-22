@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String user_id = (String) session.getAttribute("user_id");
+	String getId = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+	getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id();
+	} else {
+		getId = "";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -21,6 +31,14 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
+<script>
+    
+<%if (getId.equals("")) {%>
+    alert('먼저 로그인을 해주세요.');
+    location.href = "viewSuggestions.jsp";
+<%}%>
+    
+</script>
 
 <style>
 table {
@@ -30,6 +48,11 @@ table {
 table tr td {
 	border: 1px solid #ddd;
 }
+
+textarea {
+	height: 360px;
+}
+
 </style>
 
 </head>

@@ -16,6 +16,7 @@ import book.model.BookModel;
 import book.model.JoinModel;
 import book.model.RentModel;
 import book.model.RentalList;
+import newbook.model.Newbook;
 
 public class BookDao {
 	// 싱글톤
@@ -26,6 +27,35 @@ public class BookDao {
 	public static BookDao getInstance() {
 		return dao;
 	}
+	
+	// 신청도서 삽입(추가)
+		public int insertNewbook(Connection conn, Newbook newbook) {
+			int rCnt = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = "insert into BOOK VALUES (BOOK_ID_SEQ.nextval,?,?,?,?)";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, newbook.getNewName());
+				pstmt.setString(2, newbook.getNewAut());
+				pstmt.setString(3, newbook.getNewPub());
+				pstmt.setString(4, "not insert yet");
+				
+				rCnt = pstmt.executeUpdate();
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+			}finally {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return rCnt;
+		}
 	// 도서 추가할때 중복책 확인
 	public BookJung bookjung(Connection conn, String book_name, String book_aut) {
 		BookJung book = null;

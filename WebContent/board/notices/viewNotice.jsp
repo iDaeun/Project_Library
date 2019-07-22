@@ -16,8 +16,23 @@
 
 	Notice notData = service.getNotice(not_num);
 
-	System.out.println(notData.getNot_num());
-	System.out.println(notData.getNot_cont());
+	boolean adminChk = false;
+
+	String getId = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id();
+	} else {
+		getId = "";
+	}
+
+	if (getId.equals("admin1")) {
+		adminChk = true;
+	}
 %>
 <html>
 <head>
@@ -33,8 +48,20 @@
 <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
 
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function() {
+
+	if (
+<%=adminChk%>
+    ) {
+	    $('#noticeSpan').css('display', 'inline');
+	}
+
+    })
+</script>
 
 <style>
 table {
@@ -44,7 +71,21 @@ table {
 table tr td {
 	border: 1px solid black;
 	padding: 2px;
-	font-size: 16px;
+	font-size: 14px;
+}
+
+table tr td:nth-child(2) {
+	padding: 5px 15px;
+}
+
+table tr td:first-child {
+	width: 10%;
+	text-align: center;
+}
+
+table tr td:last-child {
+	width: 15%;
+	text-align: center;
 }
 </style>
 </head>
@@ -73,13 +114,13 @@ table tr td {
 						<td><%=notData.getNot_reg().substring(0, 10)%></td>
 					</tr>
 					<tr>
-						<td colspan="3"><textarea name="sug_cont" style="width: 100%; resize: none;" readonly="readonly"><%=notData.getNot_cont()%></textarea></td>
+						<td colspan="3" style="text-align: left; padding: 10px 10px;"><%=notData.getNot_cont().replace("\r\n", "<br>")%></td>
 					</tr>
 				</table>
 			</div>
-			<a href="viewNotices.jsp">글 목록</a> | <a
+			<a href="viewNotices.jsp">글 목록</a> <span id="noticeSpan" style="display: none;">| <a
 				href="updateNoticeForm.jsp?not_num=<%=notData.getNot_num()%>&user_id=<%=notData.getUser_id()%>"
-			>수정</a> | <a href="confirmDeleteNotice.jsp?not_num=<%=notData.getNot_num()%>&user_id=<%=notData.getUser_id()%>"> 삭제</a>
+			>수정</a> | <a href="confirmDeleteNotice.jsp?not_num=<%=notData.getNot_num()%>&user_id=<%=notData.getUser_id()%>"> 삭제</a></span>
 		</div>
 		<!-- context 끝 -->
 

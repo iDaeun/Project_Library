@@ -1,4 +1,5 @@
 
+<%@page import="users.model.LoginInfo"%>
 <%@page import="library.board.notice.service.DeleteNoticeService"%>
 <%@page import="library.board.suggestions.service.DeleteSuggestionService"%>
 <%@page import="library.board.suggestions.service.WriteSuggestionService"%>
@@ -16,8 +17,20 @@
 	boolean idChk = false;
 
 	int resultCnt = 0;
-	/* 	System.out.println(getId); */
-	if (session.getAttribute("user_id").equals("admin")) {
+
+	String user_id = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+	getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		user_id = loginInfo.getUser_id();
+	} else {
+		user_id = "";
+	}
+
+	if (user_id.equals("admin1")) {
 		idChk = true;
 	}
 %>

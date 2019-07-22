@@ -15,7 +15,19 @@
 
 	String getId = (String) request.getParameter("user_id");
 
-	if (getId.equals(session.getAttribute("user_id"))) {
+	String user_id = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+	getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		user_id = loginInfo.getUser_id();
+	} else {
+		user_id = "";
+	}
+
+	if (user_id.equals("admin1")) {
 		idChk = true;
 	}
 
@@ -58,6 +70,22 @@ table tr td {
 	border: 1px solid black;
 	padding: 2px;
 	font-size: 16px;
+}
+
+table tr td:first-child {
+	width: 10%;
+}
+
+table tr td input {
+	width: 100%;
+}
+
+textarea {
+	height: 360px;
+}
+
+#submit {
+	
 }
 </style>
 </head>

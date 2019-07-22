@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String user_id = (String) session.getAttribute("user_id");
+	String user_id = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+	getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		user_id = loginInfo.getUser_id();
+	} else {
+		user_id = "";
+	}
 
 	boolean idChk = false;
 
-	if (user_id.equals("admin")) {
+	if (user_id.equals("admin1")) {
 		idChk = true;
 	}
 %>

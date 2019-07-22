@@ -15,6 +15,8 @@ images : 이미지 모음
 
 [model]
 <MemberInfo.java> : 회원가입시 활용 -> DAO통해 DB로 저장
+- 변수
+- 메소드: boolean matchPassword(String pw)
 <LoginInfo.java> : 로그인시 활용 -> session에 저장
 
 [jdbc]
@@ -32,10 +34,47 @@ images : 이미지 모음
 
 [사용자 회원가입]
 1) <regForm.jsp>
-2) 아이디 / 비밀번호 / 이름 입력 -> submit
-3) <regProcess.jsp> 으로 이동
-4) 
-connection객체 생성
-5) <DAO.java> 객체 생성, DAO의 insert(Connection conn, MemberInfo memberInfo) 통해 정보 입력
+2) 아이디 -> "중복아이디 확인" 누르기 => <regCheck.jsp> 으로 이동 ++++ AJAX 이용!!!!!!!!!!! ++++++++
+3) <regCheckService.java> 객체 생성 -> check(String id)실행
+4) connection객체 생성, DAO객체 생성
+5) DAO -> regCheck(Connection conn, String id)실행 -> 해당 아이디 DB에 존재하는지 확인 => rCnt 리턴
+6-1) rCnt > 0 일때 해당 아이디 존재 -> "아이디 중복"알림, id입력칸에 focus적용
+6-2) 아이디 중복 안된 경우 : 해당 아이디 아이디 입력칸에 넣기
+
+-- 아이디 중복 확인 후 --
+1) 아이디 / 비밀번호 / 이름 입력 -> submit
+2) <regProcess.jsp> 으로 이동
+3) 전달받은 데이터 -> usebean 통해서 <MemberInfo.java>에 넣기
+4) <regService.java> 객체 생성 -> reg(MemberInfo memberinfo) 실행
+5) connection객체 생성
+6) <DAO.java> 객체 생성, DAO의 insert(Connection conn, MemberInfo memberInfo) => 정보 입력 후 resultCnt리턴
+7) resultCnt > 0 일때 성공적으로 회원가입 완료!
 
 [사용자 로그인]
+0) cookie에 저장된 아이디 있는지 확인 -> 있으면 아이디 입력칸에 나오도록
+1) <loginForm.jsp>
+2) 아이디 / 비밀번호 입력 -> submit
+3) <loginProcess.jsp> 으로 이동
+4) <loginService.java> 객체 생성 -> login(String id, String pw) 실행
+5) connection객체 생성
+6) <DAO.java> 객체 생성, DAO의 select(Connection conn, Strgin id) -> id로 select문 실행 => memberInfo리턴
+
+7) 아이디 존재하지 않음 : memberInfo == null -> throw new IdNotFoundException("아이디가 존재하지 않습니다:"+id); -> <loginForm.jsp> 으로 이동
+   아이디 존재, 비밀번호 틀림 : !memberInfo.matchPassword(password) -> throw new InvalidPasswordExcetion("비밀번호가 일치하지 않습니다"); -> <loginForm.jsp> 으로 이동
+   
+8) 아이디 / 비밀번호 일치하는 경우 -> <LoginInfo.java>에 데이터 저장 => session에 저장
+7) 로그인 시 "아이디 저장"에 체크한 경우 => cookie에 저장(유효기간 1일)
+
+=======
+[회원탈퇴]
+1) <deleteMemForm.jsp>
+2) 아이디 / 비밀번호 다시 입력 -> submit
+3) <deleteMemProcess.jsp> 으로 이동
+4) connection객체 생성
+5) <DAO.java> 객체 생성, DAO의 select(Connection conn, String id) => 아이디 존재하는지 확인
+	- 존재하는 경우 : DAO의 select(Connection conn, String id, String pw) => 해당 아이디와 비밀번호 일치하는지 확인
+	- 존재하지 않거나 비밀번호가 틀린 경우 : "아이디 또는 비밀번호 불일치" -> <deleteMemForm.jsp> 으로 이동
+6) 아이디 / 비밀번호 일치하는 경우 -> DAO의 delete(Connection conn, String id) 해당 회원 정보 삭제 => 삭제후 resultCnt리턴
+7) resultCnt > 0 일때 성공적으로 삭제 완료!
+
+[로그아웃]

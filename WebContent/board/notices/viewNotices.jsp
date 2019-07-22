@@ -7,8 +7,6 @@
 <!DOCTYPE html>
 
 <%
-	session.setAttribute("user_id", "Rex");
-
 	String pageNumberStr = request.getParameter("page");
 
 	int pageNumber = 1;
@@ -20,6 +18,24 @@
 	GetNoticesListService service = GetNoticesListService.getInstance();
 
 	NoticesList listData = service.getNoticesList(pageNumber);
+
+	boolean adminChk = false;
+
+	String getId = "";
+	LoginInfo loginInfo = null;
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id();
+	} else {
+		getId = "";
+	}
+
+	if (getId.equals("admin1")) {
+		adminChk = true;
+	}
 %>
 <html>
 <head>
@@ -38,15 +54,59 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
 
+<script>
+    $(document).ready(function() {
+
+	if (
+<%=adminChk%>
+    ) {
+	    $('#write').css('display', 'inline');
+	}
+
+    })
+</script>
+
 <style>
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 table {
 	width: 100%;
 }
 
+table tr:first-child {
+	font-weight: bold;
+	text-align: center;
+}
+
+table tr td:nth-child(2) {
+	padding: 5px 15px;
+}
+
+table tr td:first-child {
+	width: 10%;
+	text-align: center;
+}
+
+table tr td:last-child {
+	width: 15%;
+	text-align: center;
+}
+
 table tr td {
 	border: 1px solid black;
-	padding: 2px;
-	font-size: 16px;
+	font-size: 14px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+#pageNumber {
+	width: 100%;
+	text-align: center;
 }
 </style>
 </head>
@@ -94,14 +154,16 @@ table tr td {
 				<%
 					for (int i = 1; i <= listData.getPageTotalCount(); i++) {
 				%>
-				<a href="viewNotices.jsp?page=<%=i%>">[<%=i%>]
-				</a>
+				<div id="pageNumber">
+					<a href="viewNotices.jsp?page=<%=i%>">[<%=i%>]
+					</a>
+				</div>
 				<%
 					}
 					}
 				%>
 			</div>
-			<a href="writeNoticeForm.jsp">글 작성</a>
+			<a href="writeNoticeForm.jsp" id="write" style="float: right; display: none;">글 작성</a>
 		</div>
 		<!-- context 끝 -->
 

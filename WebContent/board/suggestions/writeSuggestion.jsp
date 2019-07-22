@@ -1,4 +1,5 @@
 
+<%@page import="users.model.LoginInfo"%>
 <%@page import="library.board.suggestions.service.WriteSuggestionService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -13,8 +14,12 @@
 <jsp:useBean id="suggestion" class="library.board.suggestions.model.Suggestion" />
 <jsp:setProperty name="suggestion" property="*" />
 <%
-	WriteSuggestionService service = WriteSuggestionService.getInstance();
-	int cnt = service.write(suggestion, (String) session.getAttribute("user_id"));
+	String user_id = "";
+	LoginInfo loginInfo = null;
+	loginInfo = (LoginInfo) session.getAttribute("login");
+	user_id = loginInfo.getUser_id();
+
+	int cnt = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +29,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
     
-<%if (cnt > 0) {%>
+<%if (suggestion.getSug_cont() == null) {%>
+    alert('내용을 입력해주세요');
+    location.href = "viewSuggestions.jsp";
+<%} else {
+				WriteSuggestionService service = WriteSuggestionService.getInstance();
+				cnt = service.write(suggestion, user_id);
+			}
+
+			if (cnt > 0) {%>
     alert('작성 완료');
     location.href = "viewSuggestions.jsp";
 <%} else {%>
