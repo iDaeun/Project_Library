@@ -138,11 +138,30 @@
 	#user_photo{
 		width: 25%;
 		height: 25%;
+		border: 3px solid black;
+		margin: 3px;
+		padding: 3px;
 	}
 	
 	img{
 		max-width: 100%;
 		max-height: auto;
+	}
+	h2{
+		text-align: center;
+		color: red;
+		font-weight: bold;
+	}
+	#img_info{
+		padding: 5px;
+	}
+	#move{
+		text-align: center;
+		color: white;
+		background-color: black;
+		font-weight: bold;
+		padding: 5px;
+		margin: 8px;
 	}
 </style>
 
@@ -166,27 +185,28 @@
 				<%
 					if (rCnt > 0) {
 				%> 
-				<h1>
-					회원가입 완료!<%=rCnt%>개 데이터 추가함
-				</h1>
+				<h2>
+					회원가입 완료! <%=rCnt%>개 데이터 추가함
+				</h2>
 
 				<%
 					if (photo) {
 				%>
-				<div>
-					저장한 이미지 출력 <br> 
+				
+				<div id="img_info">
+					<span style="font-weight: bold">저장한 이미지 출력</span> <br> 
 					<div id="user_photo">
 					<img alt="사진"	src="/lib/user_photo_upload/<%=user_photo_name%>" />
 					</div>
-				</div>
-
 				파일 이름 : <%=user_photo%>(<%=fileSize%>)<br> 
 				파일 타입 : <%=type%><br> 
 				저장 파일 이름 : <%=user_photo_name%><br> 
 				저장 폴더 : <%=dir%><br> 
-				<%= memory ? "메모리저장" : "임시파일저장" %><br>
-				<a href="<%=request.getContextPath()%>">메인페이지로 돌아가기</a>
-
+				저장 위치 : <%= memory ? "메모리저장" : "임시파일저장" %><br>
+				<hr>
+				<a id="move" href="<%=request.getContextPath()%>">메인페이지로 돌아가기</a>
+				</div>
+				
 				<%
 					}
 				
@@ -194,8 +214,8 @@
 				%>
 						
 				<%=rCnt %>
-				<h1>회원가입 실패</h1>
-				<a href="<%=request.getContextPath()%>">메인페이지로 돌아가기</a>
+				<h2>회원가입 실패</h2>
+				<a id="move" href="<%=request.getContextPath()%>">메인페이지로 돌아가기</a>
 
 				<%
 					}

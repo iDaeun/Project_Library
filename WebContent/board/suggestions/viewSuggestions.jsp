@@ -30,19 +30,52 @@
 <!-- 구글폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
 
 <style>
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 table {
 	width: 100%;
 }
 
+table tr:first-child {
+	font-weight: bold;
+	text-align: center;
+}
+
+table tr td:nth-child(2) {
+	padding: 5px 15px;
+}
+
+table tr td:first-child {
+	width: 10%;
+	text-align: center;
+}
+
+table tr td:last-child {
+	width: 15%;
+	text-align: center;
+}
+
 table tr td {
 	border: 1px solid black;
-	padding: 2px;
-	font-size: 16px;
+	font-size: 14px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+#pageNumber {
+	width: 100%;
+	text-align: center;
 }
 </style>
 </head>
@@ -99,14 +132,16 @@ table tr td {
 				<%
 					for (int i = 1; i <= listData.getPageTotalCount(); i++) {
 				%>
-				<a href="viewSuggestions.jsp?page=<%=i%>">[<%=i%>]
-				</a>
+				<div id="pageNumber">
+					<a href="viewSuggestions.jsp?page=<%=i%>">[<%=i%>]
+					</a>
+				</div>
 				<%
 					}
 					}
 				%>
 			</div>
-			<a href="writeSuggestionForm.jsp">글 작성</a>
+			<a href="writeSuggestionForm.jsp" style="float: right;">글 작성</a>
 		</div>
 		<!-- context 끝 -->
 

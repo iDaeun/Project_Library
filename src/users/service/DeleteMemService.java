@@ -45,7 +45,7 @@ public class DeleteMemService {
 			if (rent != null && rent.trim().equals("N")) {
 				
 				// 1-2. 대출 O -> 예외발생
-				throw new RentException("대출중이 도서가 있습니다, 반납 후 회원탈퇴 가능합니다!" + user_id);
+				throw new RentException("대출중이 도서가 있습니다, 반납 후 회원탈퇴 가능합니다!");
 				
 			} else {
 

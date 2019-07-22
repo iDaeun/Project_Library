@@ -78,7 +78,21 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
-
+<style>
+	h2{
+		text-align: center;
+		color: red;
+		font-weight: bold;
+	}
+	#move{
+		text-align: center;
+		color: white;
+		background-color: black;
+		font-weight: bold;
+		padding: 5px;
+		margin: 8px;
+	}
+</style>
 </head>
 
 <body>
@@ -95,7 +109,7 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>
+				<h2>
 				<%
 				if(rCnt > 0){
 				%>
@@ -114,15 +128,12 @@
 				<%
 				if(msg.length()>0){
 				%>
-					<%=msg %>
-					<script>
-					//alert('비밀번호 재입력 바람');
-					//history.go(-1);
-					</script>
+					<%=msg %> <br><br>
+					<a id="move" href="deleteMemForm.jsp" >돌아가기</a>
 				<%	
 				}
 				%>
-				</h1>
+				</h2>
 			</div>
 		</div>
 		<!-- context 끝 -->

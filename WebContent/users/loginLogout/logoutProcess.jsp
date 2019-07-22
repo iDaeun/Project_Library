@@ -41,6 +41,24 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
+
+<style>
+	h2{
+		text-align: center;
+		color: red;
+		font-weight: bold;
+	}
+	
+	#move{
+		text-align: center;
+		color: white;
+		background-color: black;
+		font-weight: bold;
+		padding: 5px;
+		margin: 8px;
+	}
+</style>
+
 </head>
 <body>
 
@@ -59,13 +77,15 @@
 				<%
 					if (chk) {
 				%>
-				<h1>
+				<h2>
 					로그아웃 되었습니다!
-					<%=session.getAttribute("login")%></h1>
+					session: <%=session.getAttribute("login")%></h2>
 				<%
 					} else {
 				%>
-				<a href="loginForm.jsp">로그인해주세요!</a>
+				<h2>로그인해주세요!<br><br>
+				<a id="move" href="loginForm.jsp">로그인 페이지로 이동</a></h2>
+				
 				<%
 					}
 				%>

@@ -64,6 +64,22 @@ table tr td {
 	padding: 2px;
 	font-size: 16px;
 }
+
+table tr td:first-child {
+	width: 10%;
+}
+
+table tr td input {
+	width: 100%;
+}
+
+textarea {
+	height: 360px;
+}
+
+#submit {
+	
+}
 </style>
 </head>
 <body>
@@ -95,7 +111,9 @@ table tr td {
 					</table>
 					<input type="hidden" name="sug_num" value="<%=sugData.getSug_num()%>"> <input type="hidden" name="user_id"
 						value="<%=sugData.getUser_id()%>"
-					> <input type="submit" value="수정">
+					>
+					<br>
+					<input type="submit" value="수정" id="submit" style="float: right;">
 				</form>
 			</div>
 			<a href="viewSuggestions.jsp">글 목록</a>

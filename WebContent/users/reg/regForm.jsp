@@ -138,6 +138,36 @@
 }
 </script>
 
+<style>
+	table{
+		margin: 0 auto;
+	}
+	
+	table td{
+		font-weight: bold;
+		padding: 5px;
+	}
+	
+	input{
+		border: 1px solid black;
+	}
+	
+	input[type=file]{
+		border: none;
+	}
+	
+	input[type=button], [type=submit] {
+		background-color: black;
+		color: white;
+		padding: 5px;
+		margin: 3px;
+	}
+	
+	input[type=submit]{
+		width: 100%;
+	}
+</style>
+
 </head>
 
 <body>
@@ -154,8 +184,6 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>회원가입</h1>
-
 				<form onsubmit="return checkz()" action="regProcess.jsp" method="post" enctype="multipart/form-data">
 					<table>
 						<tr>
@@ -168,11 +196,13 @@
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="user_pw" id="user_pw"> <span id="pw_span"></span></td>
+							<td><input type="password" name="user_pw" id="user_pw"> <br>
+							<span id="pw_span"></span></td>
 						</tr>
 						<tr>
 							<td>비밀번호 재확인</td>
-							<td><input type="password" id="user_pw1"> <span id="pw_span1"></span></td>
+							<td><input type="password" id="user_pw1"> <br>
+							<span id="pw_span1"></span></td>
 						</tr>
 						<tr>
 							<td>이름</td>
@@ -183,8 +213,7 @@
 							<td><input type="file" name="user_photo" id="user_photo"> </td>
 						</tr>
 						<tr>
-							<td></td>
-							<td><input type="submit" value="회원가입" id="submit"></td>
+							<td colspan="2" style="text-align: center"><input type="submit" value="회원가입" id="submit"></td>
 						</tr>
 					</table>
 				</form>

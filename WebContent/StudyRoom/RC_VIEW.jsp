@@ -42,6 +42,17 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 </head>
+<style>
+	#a{
+		background-color: black;	
+		color: white;
+		display: inline-block;
+		width: 50px;
+		margin-left: 3px;
+		text-align: center;
+		border-radius: 3px;
+	}
+</style>
 <body>
 	<div id="main_wrap">
 		<!-- header 시작 -->
@@ -67,9 +78,15 @@
 				15:00~18:00
 			<%}else if(user.getStudy_time() == 4){ %>
 				18:00~21:00
-				<%} %><br>
+				<%}else{%>
+					<h4>선택된 시간이 없습니다.</h4>
+				<br>
+				<% }%>
+				<br><br>
 				
-		<a href="RC.jsp">[수정]</a> | <a href="RD.jsp">[삭제]</a>
+				
+		<a href="/lib/StudyRoom/RC.jsp" id="a">수정</a>
+		<a href="/lib/StudyRoom/RD.jsp" id="a">삭제</a>
 		
 		</div>
 		<!-- footer 시작 -->

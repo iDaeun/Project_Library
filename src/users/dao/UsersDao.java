@@ -270,5 +270,30 @@ public class UsersDao {
 		return rCnt;
 
 	}
+	
+	// 회원정보 수정 업데이트
+	public int update(Connection conn, MemberInfo memberInfo,  String user_id) {
+
+		int rCnt = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "update users set USER_PHOTO = ?, USER_NAME = ?, USER_PW = ? where USER_ID = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberInfo.getUser_photo());
+			pstmt.setString(2, memberInfo.getUser_name());
+			pstmt.setString(3, memberInfo.getUser_pw());
+			pstmt.setString(4, user_id);
+			rCnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return rCnt;
+		
+	}
 
 }

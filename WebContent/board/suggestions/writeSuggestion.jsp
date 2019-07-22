@@ -19,8 +19,7 @@
 	loginInfo = (LoginInfo) session.getAttribute("login");
 	user_id = loginInfo.getUser_id();
 
-	WriteSuggestionService service = WriteSuggestionService.getInstance();
-	int cnt = service.write(suggestion, user_id);
+	int cnt = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +29,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
     
-<%if (cnt > 0) {%>
+<%if (suggestion.getSug_cont() == null) {%>
+    alert('내용을 입력해주세요');
+    location.href = "viewSuggestions.jsp";
+<%} else {
+				WriteSuggestionService service = WriteSuggestionService.getInstance();
+				cnt = service.write(suggestion, user_id);
+			}
+
+			if (cnt > 0) {%>
     alert('작성 완료');
     location.href = "viewSuggestions.jsp";
 <%} else {%>

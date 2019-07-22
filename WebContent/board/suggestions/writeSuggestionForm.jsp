@@ -48,6 +48,11 @@ table {
 table tr td {
 	border: 1px solid #ddd;
 }
+
+textarea {
+	height: 360px;
+}
+
 </style>
 
 </head>

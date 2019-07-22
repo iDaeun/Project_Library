@@ -71,6 +71,22 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
 
+<style>
+	h2{
+		text-align: center;
+		color: red;
+		font-weight: bold;
+	}
+	#move{
+		text-align: center;
+		color: white;
+		background-color: black;
+		font-weight: bold;
+		padding: 5px;
+		margin: 8px;
+	}
+</style>
+
 </head>
 
 <body>
@@ -87,20 +103,21 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>
+				<h2>
 				<%
 				if(chk){
 				%>
-					로그인되었습니다, session: <%=session.getAttribute("login") %>
+					로그인되었습니다<br> 
+					<h4>session: <%=session.getAttribute("login") %></h4>
 				<%
 				} else {
 				%>
 					<%=msg %>
-					<a href="loginForm.jsp">다시 로그인하기</a>
+					<a id="move" href="loginForm.jsp">다시 로그인하기</a>
 				<%
 				}
 				%>
-				</h1>
+				</h2>
 			</div>
 		</div>
 		<!-- context 끝 -->

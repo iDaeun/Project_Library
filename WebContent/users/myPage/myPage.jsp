@@ -43,15 +43,33 @@
 <script src="/lib/js/bootstrap.js"></script>
 
 <style>
-	#user_photo{
-		width: 25%;
-		height: 25%;
-	}
 	
 	img{
 		max-width: 100%;
 		max-height: auto;
 	}
+	
+	h2{
+		text-align: center;
+		font-weight: bold;
+	}
+	table{
+		margin: 0 auto;
+	}
+	
+	table td{
+		font-weight: bold;
+		font-size: 20px;
+		padding-left: 15px;
+	}
+	input[type=submit] {
+		background-color: black;
+		color: white;
+		padding: 5px;
+		margin: 3px;
+		width: 100%;
+	}
+	
 </style>
 
 </head>
@@ -70,28 +88,49 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>내 정보</h1>
-				<ul>
-					<li>
-					
-					<div id="user_photo">
-					<%if(memberInfo.getUser_photo().equals("none")){ %>
-						<!-- 프로필 없을때 -->
-						<img alt="사진" src="/lib/user_photo_upload/default.jpg"/>
-						
-					<% }else{ %>
-						<!-- 프로필 있을때 -->
-					<img alt="사진" src="/lib/user_photo_upload/<%=memberInfo.getUser_photo() %>"/>
-					
-					<%} %>
-					</div>
-					
-					</li>
-					<li>아이디: <%=memberInfo.getUser_id() %></li>
-					<li>비밀번호: <%=memberInfo.getUser_pw() %></li>
-					<li>이름: <%=memberInfo.getUser_name() %></li>
-					<li>가입일자: <%=memberInfo.getUser_reg() %></li>
-				</ul>
+				<h2>내 정보</h2>
+				<hr>
+				
+				<form action="changeMyInfoForm.jsp" method="post">
+				<table>
+					<tr>
+						<td rowspan="5" style="width:300px">
+						<%if(memberInfo.getUser_photo().equals("none")){ %>
+							<!-- 프로필 없을때 -->
+							<img alt="사진" src="/lib/user_photo_upload/default.jpg"/>
+							<input type="hidden" name="user_photo" value="/lib/user_photo_upload/default.jpg"/>
+						<% }else{ %>
+							<!-- 프로필 있을때 -->
+						<img alt="사진" src="/lib/user_photo_upload/<%=memberInfo.getUser_photo() %>"/>
+						<input type="hidden" name="user_photo" value="/lib/user_photo_upload/<%=memberInfo.getUser_photo() %>"/>
+						<%} %>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:150px">아이디: </td>
+						<td><%=memberInfo.getUser_id() %>
+						<input type="hidden" name="user_id" value="<%=memberInfo.getUser_id() %>"/></td>
+					</tr>
+					<tr>
+						<td style="width:150px">비밀번호: </td>
+						<td><%=memberInfo.getUser_pw() %></td>
+					</tr>
+					<tr>
+						<td style="width:150px">이름: </td>
+						<td><%=memberInfo.getUser_name() %>
+						<input type="hidden" name="user_name" value="<%=memberInfo.getUser_name() %>"/>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:150px">가입일자: </td>
+						<td><%=memberInfo.getUser_reg() %>
+						<input type="hidden" name="user_reg" value="<%=memberInfo.getUser_reg() %>"/></td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="submit" value="회원정보 수정"/></td>
+					</tr>
+				</table>
+				</form>
 			</div>
 		</div>
 		<!-- context 끝 -->

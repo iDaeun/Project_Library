@@ -49,13 +49,28 @@
 <script src="/lib/js/bootstrap.js"></script>
 
 <style>
-	#user_photo{
-		width: 25%;
-	}
-	
 	img{
 		max-width: 100%;
 		height: auto;
+	}
+	table{
+		margin: 0 auto;
+		width: 100%;
+	}
+	
+	table td{
+		font-weight: bold;
+		font-size: 20px;
+		padding-left: 15px;
+	}
+	#page{
+		font-size: 30px;
+		font-weight: bold;
+		color: black;
+	}
+	#page:hover{
+		background-color: black;
+		color: white;
 	}
 </style>
 
@@ -93,59 +108,57 @@
 			<table>
 			
 				<tr>
-					<td colspan="2">#0<%=memberInfo.getRownum() %></td>
+					<td colspan="3">#0<%=memberInfo.getRownum() %></td>
 				</tr>
 				
-				<tr>
-					<td colspan="2">
-					<div id="user_photo">
-					<%if(memberInfo.getUser_photo().equals("none")){ %>
-						<!-- 프로필 없을때 -->
-						<img alt="사진" src="/lib/user_photo_upload/default.jpg"/>
+					<tr>
+						<td rowspan="5" style="width:300px">
+						<%if(memberInfo.getUser_photo().equals("none")){ %>
+							<!-- 프로필 없을때 -->
+							<img alt="사진" src="/lib/user_photo_upload/default.jpg"/>
+							
+						<% }else{ %>
+							<!-- 프로필 있을때 -->
+						<img alt="사진" src="/lib/user_photo_upload/<%=memberInfo.getUser_photo() %>"/>
 						
-					<% }else{ %>
-						<!-- 프로필 있을때 -->
-					<img alt="사진" src="/lib/user_photo_upload/<%=memberInfo.getUser_photo() %>"/>
-					
-					<%} %>
-					</div>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>회원 아이디</td>
-					<td><%=memberInfo.getUser_id() %></td>
-				</tr>
-				
-				<tr>
-					<td>회원 비밀번호</td>
-					<td><%=memberInfo.getUser_pw() %></td>
-				</tr>
-				
-				<tr>
-					<td>회원 이름</td>
-					<td><%=memberInfo.getUser_name() %></td>
-				</tr>
-				
-				<tr>
-					<td>가입 일자</td>
-					<td><%=format.format( memberInfo.getUser_reg() ) %></td>
-				</tr>
+						<%} %>
+						</td>
+					</tr>
+					<tr>
+						<td style="width:150px">아이디: </td>
+						<td><%=memberInfo.getUser_id() %></td>
+					</tr>
+					<tr>
+						<td style="width:150px">비밀번호: </td>
+						<td><%=memberInfo.getUser_pw() %></td>
+					</tr>
+					<tr>
+						<td style="width:150px">이름: </td>
+						<td><%=memberInfo.getUser_name() %></td>
+					</tr>
+					<tr>
+						<td style="width:150px">가입일자: </td>
+						<td><%=memberInfo.getUser_reg() %></td>
+					</tr>
 			</table>
 			
 			<%		
 				}
-			}
+			} %>
+				
+				<hr>
+				<div style="text-align: center">
 			
-				// 페이지 번호 나누기
+			<%	// 페이지 번호 나누기
 				for (int i = 1; i<= mListView.getPgTotalCnt(); i++){
 			%>
 				<!-- 해당 페이지로 이동 -->
-				<a href="usersList.jsp?page=<%=i%>">[<%=i%>]</a>
 				
+				<a id="page" href="usersList.jsp?page=<%=i%>">[<%=i%>]</a>
 			<%		
 				}
 			%>
+				</div>
 			</div>
 		</div>
 		<!-- context 끝 -->

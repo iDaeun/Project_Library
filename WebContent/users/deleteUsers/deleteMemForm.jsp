@@ -67,6 +67,35 @@
 		}
 
 </script>
+
+<style>
+	h2{
+		text-align: center;
+		color: red;
+		font-weight: bold;
+	}
+	table{
+		margin: 0 auto;
+	}
+	
+	table td{
+		font-weight: bold;
+		padding: 5px;
+	}
+	
+	input{
+		border: 1px solid black;
+	}
+	input[type=submit] {
+		background-color: black;
+		color: white;
+		padding: 5px;
+		margin: 3px;
+		width: 100%;
+	}
+	
+</style>
+
 </head>
 <body>
 
@@ -82,7 +111,7 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>비밀번호 다시 입력</h1>
+				<h2>비밀번호 다시 입력</h2>
 
 				<form onsubmit="return checkz()" action="deleteMemProcess.jsp" method="post">
 					<table>
@@ -93,12 +122,11 @@
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="user_pw" id="user_pw">
+							<td><input type="password" name="user_pw" id="user_pw"> <br>
 								<span id="pw_span"></span></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td><input type="submit" value="회원탈퇴" id="submit"></td>
+							<td colspan="2"><input type="submit" value="회원탈퇴" id="submit"></td>
 						</tr>
 					</table>
 				</form>

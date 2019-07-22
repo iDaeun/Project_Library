@@ -71,6 +71,22 @@ table tr td {
 	padding: 2px;
 	font-size: 16px;
 }
+
+table tr td:first-child {
+	width: 10%;
+}
+
+table tr td input {
+	width: 100%;
+}
+
+textarea {
+	height: 360px;
+}
+
+#submit {
+	
+}
 </style>
 </head>
 <body>

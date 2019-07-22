@@ -41,6 +41,10 @@ public class UpdateSuggestionService {
 
 		Connection conn = null;
 
+		if (sug_comment.trim().equals("")) {
+			return rCnt;
+		}
+
 		try {
 			conn = ConnectionProvider.getConnection();
 			SuggestionsDao dao = SuggestionsDao.getInstance();

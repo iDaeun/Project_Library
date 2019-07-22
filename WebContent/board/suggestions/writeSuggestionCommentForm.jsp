@@ -30,13 +30,43 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/lib/js/bootstrap.js"></script>
 
+<script>
+    
+</script>
+
 <style>
 table {
 	width: 100%;
 }
 
 table tr td {
-	border: 1px solid #ddd;
+	border: 1px solid black;
+}
+
+table tr td:nth-child(2) {
+	padding: 5px 15px;
+}
+
+#sugg tr td:first-child {
+	width: 10%;
+	text-align: center;
+}
+
+#sugg tr td input {
+	width: 100%;
+}
+
+#sugg tr td textarea {
+	height: 60px;
+}
+
+#comm tr:first-child {
+	font-weight: bold;
+	text-align: center;
+}
+
+textarea {
+	height: 360px;
 }
 </style>
 
@@ -56,29 +86,31 @@ table tr td {
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<table>
+				<table id="sugg">
 					<tr>
 						<td>글 제목</td>
-						<td><input type="text" value="<%=sugData.getSug_title()%>" readonly="readonly"></td>
+						<td><%=sugData.getSug_title()%></td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea style="width: 100%; resize: none;" readonly="readonly"><%=sugData.getSug_cont()%></textarea></td>
+						<td><%=sugData.getSug_cont().replace("\r\n", "<br>")%></td>
 					</tr>
 					<tr>
 					</tr>
 				</table>
 				<hr>
 				<form action="writeSuggestionComment.jsp" method="post">
-					<table>
+					<table id="comm">
 						<tr>
 							<td style="text-align: center;">답글</td>
 						</tr>
 						<tr>
-							<td><textarea style="width: 100%; resize: none;" name="sug_comment"></textarea></td>
+							<td><textarea style="width: 100%; resize: none;" name="sug_comment" id="sug_comment"></textarea></td>
 						</tr>
 					</table>
-					<input type="hidden" name="sug_num" value="<%=sugData.getSug_num()%>"> <input type="submit" value="답글 등록">
+					<input type="hidden" name="sug_num" value="<%=sugData.getSug_num()%>"> <input type="submit"
+						id="writeComment" value="답글 등록"
+					>
 				</form>
 				<table>
 

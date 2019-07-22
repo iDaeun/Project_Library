@@ -81,6 +81,36 @@
 
 </script>
 
+<style>
+	table{
+		margin: 0 auto;	
+	}
+	
+	table td{
+		font-weight: bold;
+		padding: 5px;
+	}
+	
+	input{
+		border: 1px solid black;
+	}
+	
+	input[type=button], [type=submit] {
+		background-color: black;
+		color: white;
+		padding: 5px;
+		margin: 3px;
+	}
+	
+	input[type=submit]{
+		width: 100%;
+	}
+	
+	input[type=checkbox]{
+		margin-left: 5px;
+	}
+</style>
+
 </head>
 
 <body>
@@ -97,25 +127,26 @@
 		<!-- context 시작 -->
 		<div id="context">
 			<div id="ct">
-				<h1>로그인</h1>
-
 				<form onsubmit="return checkz()" action="loginProcess.jsp" method="post">
 					<table>
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="user_id" id="user_id"
-								value="<%=savedId%>"> <span id="id_span"></span> <br>
-								아이디저장<input type="checkbox" value="saved" name="saved"><br>
+							<td><input type="text" name="user_id" id="user_id" value="<%=savedId%>"> <br>
+								<span id="id_span"></span>
+							</td>
+							<td>
+							아이디저장<input type="checkbox" value="saved" name="saved">
 							</td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="user_pw" id="user_pw">
-								<span id="pw_span"></span></td>
+							<td><input type="password" name="user_pw" id="user_pw"> <br>
+								<span id="pw_span"></span>
+							</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td><input type="submit" value="로그인" id="submit"></td>
+							<td colspan="3" style="text-align: center"><input type="submit" value="로그인" id="submit"></td>
 						</tr>
 					</table>
 				</form>

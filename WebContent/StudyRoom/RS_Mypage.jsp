@@ -48,6 +48,17 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
+<style>
+	#a{
+		background-color: black;	
+		color: white;
+		display: inline-block;
+		width: 50px;
+		margin-left: 3px;
+		text-align: center;
+		border-radius: 3px;
+	}
+</style>
 </head>
 <body>
 	<div id="main_wrap">
@@ -69,9 +80,20 @@
 		<%		
 			} else {
 		%>
+		 
 		좌석번호 : <%= user_num %><br>
-		선택한 시간 : <%= user_time %><br>
-		<a href="/lib/StudyRoom/RC.jsp">수정</a> <a href="/lib/StudyRoom/RD.jsp">삭제</a>
+		선택한 시간 : <% if(user_time == 1){%>
+				09:00~12:00
+			<%
+			}else if(user_time == 2){
+			%>
+				12:00~15:00
+			<%}else if(user_time == 3){ %>
+				15:00~18:00
+			<%}else if(user_time == 4){ %>
+				18:00~21:00
+				<%} %><br><br>
+		<a href="/lib/StudyRoom/RC.jsp" id="a">수정</a> <a href="/lib/StudyRoom/RD.jsp" id="a">삭제</a>
 		<%} %>
 		</div>
 		<!-- footer 시작 -->

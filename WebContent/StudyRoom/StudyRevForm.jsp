@@ -64,14 +64,21 @@
 	text-align: center;
 	}
 	#table td{
-	border : 2px solid black; 
+	border : 1px solid gray;
+	filter: Alpha(Opacity=50);
 	}
+	/* 수정 */
 	#sub{
-	width: 80px;
+	width: 100px;
 	height : 30px;
-	border-radius : 5px;
 	background-color: black;
-	color: beige;
+	border-color : black;
+	border-radius : 5px;
+	color: white;
+	}
+	#seat{
+	font-size: 10px;
+	padding: 3px;
 	}
 	
 
@@ -105,29 +112,29 @@
 
 			
 				<h3 id="h3">예약시간을 선택해주세요</h3>
-				<form action="StudyRev.jsp" method="POST">
+				<form id="form" action="StudyRev.jsp" method="POST">
 					<table id="table">
 						<tr>
 							<td>날짜</td>
 							<td><fmt:formatDate value="${date}" pattern="MM월dd일" /></td>
 						</tr>
 						<tr>
-							<td>시간</td>
-							<td><input type="radio" name="time" value="1">09:00~12:00<br>
-								<input type="radio" name="time" value="2">12:00~15:00<br>
-								<input type="radio" name="time" value="3">15:00~18:00<br>
-								<input type="radio" name="time" value="4">18:00~21:00<br>
+							<td >시간</td>
+							<td><input type="radio" class ="times" name="time" value="1">09:00~12:00<br>
+								<input type="radio" class ="times" name="time" value="2">12:00~15:00<br>
+								<input type="radio" class ="times" name="time" value="3">15:00~18:00<br>
+								<input type="radio" class ="times" name="time" value="4">18:00~21:00<br>
 							</td>
 						</tr>
 						<tr>
 							<td>좌석번호</td>
-							<td><select name="seat">
+							<td><select name="seat" id="seat">
 									<option id="s">자리선택</option>
-									<option value="1" id="1s">1번 자리</option>
-									<option value="2" id="2s">2번 자리</option>
-									<option value="3" id="3s">3번 자리</option>
-									<option value="4" id="4s">4번 자리</option>
-									<option value="5" id="5s">5번 자리</option>
+									<option  value="1" name ="seats" id="1s">1번 자리</option>
+									<option  value="2" name ="seats" id="2s">2번 자리</option>
+									<option  value="3" name ="seats" id="3s">3번 자리</option>
+									<option value="4" name ="seats" id="4s">4번 자리</option>
+									<option  value="5" name ="seats" id="5s">5번 자리</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -147,6 +154,7 @@
 
 </body>
 </html>
+
 <!-- 1번 시간에 자리가 있을 시  -->
 	<%
 	if(timeOne == 1){

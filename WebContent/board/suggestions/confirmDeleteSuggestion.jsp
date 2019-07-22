@@ -13,16 +13,23 @@
 	request.setCharacterEncoding("UTF-8");
 	int sug_num = Integer.parseInt(request.getParameter("sug_num"));
 
-	String getId = (String) request.getParameter("user_id");
+	String user_id = (String) request.getParameter("user_id");
 
 	boolean idChk = false;
 
 	int resultCnt = 0;
 
-	String user_id = "";
+	String getId = "";
 	LoginInfo loginInfo = null;
-	loginInfo = (LoginInfo) session.getAttribute("login");
-	user_id = loginInfo.getUser_id();
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id(); */
+
+	if ((LoginInfo) session.getAttribute("login") != null) {
+		loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id();
+	} else {
+		getId = "";
+	}
 
 	/* 	System.out.println(getId); */
 	if (getId.equals(user_id)) {
@@ -45,8 +52,7 @@
 	    alert('작성자만 삭제 가능합니다.');
 	    history.go(-1);
 	} else {
-	    location.href = "deleteSuggestion.jsp?sug_num=<%=sug_num%>
-    ";
+	    location.href = "deleteSuggestion.jsp?sug_num=<%=sug_num%>";
 	}
     } else {
 	location.href = "viewSuggestions.jsp";

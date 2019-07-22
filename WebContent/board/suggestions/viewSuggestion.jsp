@@ -12,17 +12,16 @@
 
 	String getId = "";
 	LoginInfo loginInfo = null;
-/* 	loginInfo = (LoginInfo) session.getAttribute("login");
-	getId = loginInfo.getUser_id(); */
+	/* 	loginInfo = (LoginInfo) session.getAttribute("login");
+		getId = loginInfo.getUser_id(); */
 
-	
-	if((LoginInfo) session.getAttribute("login") != null) {
+	if ((LoginInfo) session.getAttribute("login") != null) {
 		loginInfo = (LoginInfo) session.getAttribute("login");
 		getId = loginInfo.getUser_id();
 	} else {
 		getId = "";
 	}
-	
+
 	/* 글 내용을 보여주는 서비스 작업을 처리할 객체 */
 	GetSuggestionService service = GetSuggestionService.getInstance();
 
@@ -79,14 +78,36 @@
 </script>
 
 <style>
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 table {
 	width: 100%;
 }
 
 table tr td {
 	border: 1px solid black;
-	padding: 2px;
 	font-size: 16px;
+}
+
+table tr:first-child {
+	font-weight: bold;
+	text-align: center;
+}
+
+table tr td:nth-child(2) {
+	padding: 5px 15px;
+}
+
+table tr td:first-child {
+	width: 10%;
+	text-align: center;
+}
+
+table tr td:last-child {
+	width: 15%;
+	text-align: center;
 }
 </style>
 </head>
@@ -115,10 +136,7 @@ table tr td {
 						<td><%=sugData.getUser_id()%></td>
 					</tr>
 					<tr>
-						<td colspan="3" style="text-align: center">글 내용</td>
-					</tr>
-					<tr>
-						<td colspan="3"><textarea name="sug_cont" style="width: 100%; resize: none;" readonly="readonly"><%=sugData.getSug_cont()%></textarea></td>
+						<td colspan="3" style="text-align: left; padding: 10px 10px;"><%=sugData.getSug_cont().replace("\r\n", "<br>")%></td>
 					</tr>
 				</table>
 			</div>
