@@ -3,6 +3,6 @@
 
     <div id="header">
 			<h1>
-				<a>Welcome to BIT Library</a>
+				<a href="<%=request.getContextPath()%>">Welcome to BIT Library</a>
 			</h1>
 		</div>
