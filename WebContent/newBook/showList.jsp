@@ -2,11 +2,11 @@
 <%@page import="newbook.model.Newbook"%>
 <%@page import="newbook.service.InsertNewbookService"%>
 <%@page import="newbook.model.NewbookListView"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!--------------------------------------받아올 변수들의 인코딩 처리---------------------------------------------------------->
 <%
 	request.setCharacterEncoding("utf-8");
-	response.setCharacterEncoding("text/html; charset=utf-8");
 %>
 
 <!--------------------------------------페이지 처리---------------------------------------------------------->
@@ -43,8 +43,12 @@
 <link rel="stylesheet" href="../cssFiles/default.css" type="text/css">
 
 <!-- 구글폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap"
+	rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
@@ -106,37 +110,42 @@ h2 {
 				<hr>
 				<div id="applyresult">
 					<form action="addbookList.jsp">
-						<table>
-							<thead>
-								<tr>
-									<th>도서명</th>
-									<th>작가명</th>
-									<th>출판사</th>
-									<th></th>
-								</tr>
-							</thead>
+					<table>
+						<thead>
+							<tr>
+								<th>도서구매</th>
+								<th>도서명</th>
+								<th>작가명</th>
+								<th>출판사</th>
+								<th>회원이름</th>
+							</tr>
+						</thead>
 							<%
 								for (Newbook nbook : viewData.getNewbookList()) {
 							%>
+						
+						<tbody>
+							<tr>
+								<td><input type="checkbox" name="checkList" value=<%=nbook.getNewbookNum()%>></td>
+								<td><%=nbook.getNewName()%></td>
+								<td><%=nbook.getNewAut()%></td>
+								<td><%=nbook.getNewPub()%></td>
+								<td><%=nbook.getUserid()%></td>
+								<td><a
+									href="updateForm.jsp?newbookNum=<%=nbook.getNewbookNum()%>">수정</a>
+									| <a href="deletion.jsp?newbookNum=<%=nbook.getNewbookNum()%>">삭제</a>
+								</td>
+							</tr>
 
-							<tbody>
-								<tr>
-									<td><%=nbook.getNewName()%></td>
-									<td><%=nbook.getNewAut()%></td>
-									<td><%=nbook.getNewPub()%></td>
-									<td><a href="updateForm.jsp?newbookNum=<%=nbook.getNewbookNum()%>">수정</a> | <a
-										href="deletion.jsp?newbookNum=<%=nbook.getNewbookNum()%>"
-									>삭제</a></td>
-								</tr>
-
-								<%
-									}
-								%>
-								<tr>
-									<td colspan="4" align="center"><input type="submit" value="신청도서추가" id="button"></td>
-								</tr>
-							</tbody>
-						</table>
+							<%
+								}
+							%>
+							<tr>
+								<td colspan="6" align="center"><input type="submit"
+									value="신청도서추가" id="button"></td>
+							</tr>
+						</tbody>
+					</table>
 					</form>
 					<hr>
 
@@ -152,11 +161,11 @@ h2 {
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- context 끝 -->
 
-	<!-- footer 시작 -->
-	<%@include file="../frame/footer.jsp"%>
-	<!-- footer 끝 -->
+		<!-- context 끝 -->
+
+		<!-- footer 시작 -->
+		<%@include file="../frame/footer.jsp"%>
+		<!-- footer 끝 -->
 </body>
 </html>
