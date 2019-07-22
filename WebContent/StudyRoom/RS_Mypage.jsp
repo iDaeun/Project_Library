@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="StudyRoom.model.user"%>
 <%@page import="StudyRoomService.RVservice"%>
 <%@page import="StudyRoom.model.Study_room"%>
@@ -7,28 +8,9 @@
     pageEncoding="UTF-8"%>
     <% 
     LoginInfo loginInfo = (LoginInfo)session.getAttribute("login");
-	
-    int user_num = 0;
-    int user_time = 0;
-    		
-    		
-    		if(loginInfo != null){
-    			
-    			try {
-    				RVservice service = RVservice.getInstance();
-    	    		user user = service.SeatRV(loginInfo.getUser_id());
-    	    		user_num = user.getSeat_num();
-    	    		user_time = user.getStudy_time();
-    			} catch(Exception e){
-    				
-    			}
-    			}else{%>
-    			<script>alert('로그인을 해주세요.');
-    				location.href = "/lib/loginLogout/loginForm.jsp";
-    			</script>
-    			
-    			<%}	%>
     
+    RVservice service = RVservice.getInstance();
+    List<Study_room> list = service.allRV(loginInfo.getUser_id());   
     
     %>
 <!DOCTYPE html>
@@ -74,27 +56,37 @@
 		<div id="context">
 		<h3>마이페이지</h3>
 		<%
-			if(user_num == 0 && user_time == 0){
-		%>
-			<h2>예약하신 자리가 없습니다</h2>
-		<%		
-			} else {
-		%>
-		 
-		좌석번호 : <%= user_num %><br>
-		선택한 시간 : <% if(user_time == 1){%>
-				09:00~12:00
-			<%
-			}else if(user_time == 2){
+		if(!(list.isEmpty())){
+		
+		for(int i =0; i<list.size();i++){
 			%>
-				12:00~15:00
-			<%}else if(user_time == 3){ %>
-				15:00~18:00
-			<%}else if(user_time == 4){ %>
-				18:00~21:00
-				<%} %><br><br>
-		<a href="/lib/StudyRoom/RC.jsp" id="a">수정</a> <a href="/lib/StudyRoom/RD.jsp" id="a">삭제</a>
-		<%} %>
+		회원 아이디 : <%= list.get(i).getUser_id() %><br>
+		좌석번호 : <%= list.get(i).getSeat_num() %><br>
+		선택한 시간 : <%	if(list.get(i).getStudy_time() == 1){ %>
+			09:00~12:00
+			<% }else if(list.get(i).getStudy_time() == 2){ %>	
+			12:00~15:00
+			<% }else if(list.get(i).getStudy_time() == 3){ %>
+			15:00~18:00
+			<% }else if(list.get(i).getStudy_time() == 4){ %>
+			18:00~21:00
+			<% } %>
+		<br><br>
+		<a href="/lib/StudyRoom/RC.jsp" id="a">수정</a>
+		<a href="/lib/StudyRoom/RD.jsp" id="a">삭제</a>
+		<br><br>
+		
+		<%
+			}
+		}else{
+		%>
+			<h3>예약된 좌석이 없습니다.</h3>
+			<%= list.size() %>
+		<%	
+		}
+		%>
+		
+		
 		</div>
 		<!-- footer 시작 -->
 		<%@include file="../frame/footer.jsp"%>

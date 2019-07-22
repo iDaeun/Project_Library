@@ -1,27 +1,20 @@
 <%@page import="StudyRoomService.StudyChkService"%>
 <%@page import="StudyRoom.model.Study_room"%>
 <%@page import="StudyRoomService.SeatNum"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
 
 	int time = Integer.parseInt(request.getParameter("time"));
-	LoginInfo loginInfo = (LoginInfo)session.getAttribute("login");
+	LoginInfo loginInfo = (LoginInfo) session.getAttribute("login");
 	String user_id = loginInfo.getUser_id();
 	int seat = Integer.parseInt(request.getParameter("seat"));
-	
+
 	Study_room studyroom = new Study_room(time, user_id, seat);
 	System.out.println(user_id);
 
-	
-		SeatNum seatnum = SeatNum.getInstance();
-		seatnum.SeatRev(studyroom);
-	
-	
- 	
- 	 
-	
+	SeatNum seatnum = SeatNum.getInstance();
+	seatnum.SeatRev(studyroom);
 %>
 <!DOCTYPE html>
 <html>
@@ -50,29 +43,41 @@
 		<!-- nav 시작 -->
 		<%@include file="../frame/nav.jsp"%>
 		<!-- nav 끝 -->
-				
+
 		<!-- context 시작 -->
 		<div id="context">
-		<h4>선택하신 자리입니다.</h4>
-		<br>
-		좌석번호 : <%= studyroom.getSeat_num() %><br>
-		시간 : <% if(studyroom.getStudy_time() == 1){%>
-				09:00~12:00
+			<h4>선택하신 자리입니다.</h4>
+			<br>
+			좌석번호 :
+			<%=studyroom.getSeat_num()%><br>
+			시간 :
 			<%
-			}else if(studyroom.getStudy_time() == 2){
+				if (studyroom.getStudy_time() == 1) {
 			%>
-				12:00~15:00
-			<%}else if(studyroom.getStudy_time() == 3){ %>
-				15:00~18:00
-			<%}else if(studyroom.getStudy_time() == 4){ %>
-				18:00~21:00
-				<%} %><br>
-				
+			09:00~12:00
+			<%
+				} else if (studyroom.getStudy_time() == 2) {
+			%>
+			12:00~15:00
+			<%
+				} else if (studyroom.getStudy_time() == 3) {
+			%>
+			15:00~18:00
+			<%
+				} else if (studyroom.getStudy_time() == 4) {
+			%>
+			18:00~21:00
+			<%
+				}
+			%><br>
+			<br>
+
+
 		</div>
 		<!-- footer 시작 -->
 		<%@include file="../frame/footer.jsp"%>
 		<!-- footer 끝 -->
-		
+
 	</div>
 
 </body>
